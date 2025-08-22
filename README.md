@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A few questions</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #form { margin-top: 20px; }
+    #message { font-weight: bold; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <h1>A few questions</h1>
+  <p>I am asking you these questions for the safety of everyone else who joins this server</p>
+
+  <div id="form">
+    <h3>Enter your username:</h3>
+    <input id="username" placeholder="Your username"><br><br>
+
+    <h3>Do you plan to cyber bully on this server?</h3>
+    <p>Say yes or no: <input id="q1"></p>
+
+    <h3>Will you offend anybody and make unnecessary conflict?</h3>
+    <p>Say yes or no: <input id="q2"></p>
+
+    <button onclick="checkAnswers()">Submit</button>
+  </div>
+
+  <p id="message"></p>
+
+  <script>
+    let usernames = []; // temporary list (resets if page refreshes)
+
+    function checkAnswers() {
+      const user = document.getElementById("username").value.trim();
+      const q1 = document.getElementById("q1").value.trim().toLowerCase();
+      const q2 = document.getElementById("q2").value.trim().toLowerCase();
+      const msg = document.getElementById("message");
+      const form = document.getElementById("form");
+
+      if (!user) {
+        msg.textContent = "Please enter your username.";
+        msg.style.color = "red";
+        return;
+      }
+
+      if ((q1 !== "yes" && q1 !== "no") || (q2 !== "yes" && q2 !== "no")) {
+        msg.textContent = "pls type yes or no";
+        msg.style.color = "red";
+        return;
+      }
+
+      // Kick if they say yes to any question
+      if (q1 === "yes" || q2 === "yes") {
+        form.innerHTML = "<h2>You are not allowed to continue.</h2>";
+        msg.textContent = "";
+        return;
+      }
+
+      // Limit entries to 15 usernames
+      if (usernames.length >= 15) {
+        form.innerHTML = "<h2>We are full. Visit us next month.</h2>";
+        msg.textContent = "";
+        return;
+      }
+
+      usernames.push(user);
+      console.log("Usernames so far:", usernames);
+
+      msg.style.color = "green";
+      msg.textContent = "✅ Thank you for answering. Redirecting...";
+
+      // Redirect to your Discord invite (replace the link below with your actual invite)
+      setTimeout(() => {
+        window.location.href = "https://discord.gg/DKUs9v9H;
+      }, 2000); // wait 2 seconds before redirect
+    }
+  </script>
+</body>
+</html>
